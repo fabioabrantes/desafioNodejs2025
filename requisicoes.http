@@ -1,0 +1,8 @@
+POST http://localhost:3333/courses
+
+{
+    "title": "Curso de NodeJS",
+    "duration": "500"
+}
+
+###
