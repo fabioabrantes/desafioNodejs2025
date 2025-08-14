@@ -80,20 +80,4 @@ Abaixo estão os endpoints disponíveis na aplicação. Sinta-se à vontade para
 
 ---
 
-## 🏗️ Arquitetura e Fluxo de Dados
-
-O diagrama abaixo ilustra o fluxo principal de uma requisição na API, desde a chegada no servidor até a resposta ao cliente.
-
-```mermaid
-graph TD
-    A[Cliente <br/>(Browser/Insomnia)] -->|1. Requisição HTTP <br/> (ex: POST /courses)| B(Servidor Fastify)
-    B -->|2. Roteamento| C{Rota Específica}
-    C -->|3. Validação do Body/Params <br/> com Zod| D[Lógica do Handler]
-    D -->|4. Executa a Query <br/> com Drizzle ORM| E[(Banco de Dados)]
-    E -->|5. Retorna os dados| D
-    D -->|6. Envia a Resposta| B
-    B -->|7. Resposta HTTP <br/> (ex: 201 Created)| A
-```
----
-
 Feito com ❤️ por Seu Nome.
