@@ -1,6 +1,6 @@
 # Desafio: Sua Primeira API com Node.js
 
- O objetivo é construir uma API RESTful simples, aplicando conceitos fundamentais de desenvolvimento backend com Node.js e as tecnologias mais modernas do ecossistema.
+Este projeto é o resultado do desafio "Sua Primeira API com Node.js" proposto pela [Rocketseat](https://www.rocketseat.com.br/). O objetivo é construir uma API RESTful simples, aplicando conceitos fundamentais de desenvolvimento backend com Node.js e as tecnologias mais modernas do ecossistema.
 
 ## ✨ Tecnologias
 
@@ -52,10 +52,10 @@ npm install
 
 ### 4. Rodando as Migrations
 
-Para criar as tabelas no banco de dados com base nos esquemas definidos, execute o comando de migration do Drizzle:
+Para criar as tabelas no banco de dados com base nos esquemas definidos, execute o comando de migration:
 
 ```bash
-npx drizzle-kit migrate
+npm run db:migrate
 ```
 
 ### 5. Iniciando o Servidor
@@ -68,5 +68,32 @@ npm run dev
 
 O servidor estará disponível em `http://localhost:3333` (ou na porta que você configurou no arquivo `.env`).
 
+## 🌐 Endpoints da API
+
+Abaixo estão os endpoints disponíveis na aplicação. Sinta-se à vontade para testá-los com uma ferramenta como o Insomnia, Postman ou a documentação do Swagger UI em `http://localhost:3333/docs`.
+
+| Método HTTP | Rota           | Descrição                              | Corpo da Requisição (Exemplo)         |
+| :---------- | :------------- | :------------------------------------- | :------------------------------------ |
+| `POST`      | `/courses`     | Cria um novo curso.                    | `{ "title": "Curso de Node.js" }`     |
+| `GET`       | `/courses`     | Retorna uma lista de todos os cursos.  | (vazio)                               |
+| `GET`       | `/courses/:id` | Retorna os detalhes de um curso específico. | (vazio)                               |
+
 ---
 
+## 🏗️ Arquitetura e Fluxo de Dados
+
+O diagrama abaixo ilustra o fluxo principal de uma requisição na API, desde a chegada no servidor até a resposta ao cliente.
+
+```mermaid
+graph TD
+    A[Cliente <br/>(Browser/Insomnia)] -->|1. Requisição HTTP <br/> (ex: POST /courses)| B(Servidor Fastify)
+    B -->|2. Roteamento| C{Rota Específica}
+    C -->|3. Validação do Body/Params <br/> com Zod| D[Lógica do Handler]
+    D -->|4. Executa a Query <br/> com Drizzle ORM| E[(Banco de Dados)]
+    E -->|5. Retorna os dados| D
+    D -->|6. Envia a Resposta| B
+    B -->|7. Resposta HTTP <br/> (ex: 201 Created)| A
+```
+---
+
+Feito com ❤️ por Seu Nome.
