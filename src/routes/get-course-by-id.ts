@@ -1,4 +1,4 @@
-import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
+import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";/* a fim de que o swagegr pegue as rotas. tem que deixar Async as rotas*/
 import { db } from "../database/client";
 import { courses } from "../database/schema";
 import z from "zod";
