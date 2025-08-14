@@ -21,7 +21,7 @@ export const getCourseByIdRoute: FastifyPluginAsyncZod = async (server) => {
               title: z.string(),
               description: z.string().nullable(),
             }),
-          }),
+          }).describe("Course found"),
           404: z.null().describe("Course not found"),
         },
       },

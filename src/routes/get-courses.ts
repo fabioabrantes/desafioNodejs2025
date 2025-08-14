@@ -18,7 +18,7 @@ export const getCoursesRoute: FastifyPluginAsyncZod = async (server) => {
                 title: z.string(),
               })
             ),
-          }),
+          }).describe("List of courses"),
         },
       },
     },

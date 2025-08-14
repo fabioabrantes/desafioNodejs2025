@@ -1,7 +1,9 @@
-import "dotenv/config";
 import fastify from "fastify";
 
 import { fastifySwagger } from "@fastify/swagger";
+import { fastifySwaggerUi } from "@fastify/swagger-ui";
+import scalarAPIReference from "@scalar/fastify-api-reference";/* uma alternativa aoswagger-ui com interface mais bonita */
+
 import {
   validatorCompiler,
   serializerCompiler,
@@ -11,7 +13,6 @@ import {
 import { createCourseRoute } from "./src/routes/create-course";
 import { getCourseByIdRoute } from "./src/routes/get-course-by-id";
 import { getCoursesRoute } from "./src/routes/get-courses";
-import scalarAPIReference from "@scalar/fastify-api-reference";
 
 const server = fastify({
   logger: {
@@ -28,21 +29,33 @@ const server = fastify({
 if (process.env.NODE_ENV === "development") {
   server.register(fastifySwagger, {
     openapi: {
+      /* Define informações básicas da API (título e versão) usando o padrão OpenAPI */
       info: {
         title: "Desafio Node.js",
         version: "1.0.0",
       },
     },
-    transform: jsonSchemaTransform,
+    transform:
+      jsonSchemaTransform /* Aplica uma função de transformação (jsonSchemaTransform) para converter os schemas que você definiu nas rotas para o formato que o Swagger entende. */,
   });
 
+  /*     server.register(fastifySwaggerUi, {
+    routePrefix: "/docs",
+  }); */
   server.register(scalarAPIReference, {
     routePrefix: "/docs",
+    configuration:{
+      theme:'bluePlanet'
+    }
   });
 }
 
-server.setValidatorCompiler(validatorCompiler);
-server.setSerializerCompiler(serializerCompiler);
+server.setValidatorCompiler(
+  validatorCompiler
+); /* Define como os dados de entrada são validados */
+server.setSerializerCompiler(
+  serializerCompiler
+); /* Define como os dados de saída são serializados */
 
 server.register(createCourseRoute);
 server.register(getCourseByIdRoute);
@@ -51,3 +64,5 @@ server.register(getCoursesRoute);
 server.listen({ port: 3333 }).then(() => {
   console.log("http: server running");
 });
+
+/* https://github.com/rocketseat-education/desafio-api-nodejs */
