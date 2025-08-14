@@ -80,4 +80,3 @@ Abaixo estão os endpoints disponíveis na aplicação. Sinta-se à vontade para
 
 ---
 
-Feito com ❤️ por Seu Nome.
