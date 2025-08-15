@@ -2,7 +2,7 @@ import fastify from "fastify";
 
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
-import scalarAPIReference from "@scalar/fastify-api-reference";/* uma alternativa aoswagger-ui com interface mais bonita */
+import scalarAPIReference from "@scalar/fastify-api-reference"; /* uma alternativa aoswagger-ui com interface mais bonita */
 
 import {
   validatorCompiler,
@@ -10,9 +10,9 @@ import {
   type ZodTypeProvider,
   jsonSchemaTransform,
 } from "fastify-type-provider-zod";
-import { createCourseRoute } from "./src/routes/create-course";
-import { getCourseByIdRoute } from "./src/routes/get-course-by-id";
-import { getCoursesRoute } from "./src/routes/get-courses";
+import { createCourseRoute } from "./routes/create-course";
+import { getCourseByIdRoute } from "./routes/get-course-by-id";
+import { getCoursesRoute } from "./routes/get-courses";
 
 const server = fastify({
   logger: {
@@ -44,9 +44,9 @@ if (process.env.NODE_ENV === "development") {
   }); */
   server.register(scalarAPIReference, {
     routePrefix: "/docs",
-    configuration:{
-      theme:'bluePlanet'
-    }
+    configuration: {
+      theme: "bluePlanet",
+    },
   });
 }
 
@@ -61,8 +61,6 @@ server.register(createCourseRoute);
 server.register(getCourseByIdRoute);
 server.register(getCoursesRoute);
 
-server.listen({ port: 3333 }).then(() => {
-  console.log("http: server running");
-});
+export { server };
 
 /* https://github.com/rocketseat-education/desafio-api-nodejs */
